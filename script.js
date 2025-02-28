@@ -1,5 +1,7 @@
  console.log("Lets start with some JS")
- async function getSongs() {
+ let curentSong= new Audio();
+
+ async function getSongs() {         //getting songs from folder
   let a = await fetch("http://127.0.0.1:5501/songs/")  
   let response= await a.text();
   let div=document.createElement("div")
@@ -16,8 +18,15 @@
   }
   return songs
  }
+ const playMusic=(track)=>{
+    curentSong.src= "/songs/"+track;
+    curentSong.play()
+    play.src="pause.svg"
+    document.querySelector(".songinfo").innerHTML=track
+    document.querySelector(".songtime").innerHTML="00:00 / 00:00"
+ }
  async function main(){
-    let songs=await getSongs()
+    let songs=await getSongs()      
     console.log(songs)
 
     let songUL=document.querySelector(".songList").getElementsByTagName("ul")[0]
@@ -38,12 +47,24 @@
         
         ` ;
     }
-    //Playing the song
-    var audio=new Audio(songs[0]);
-    //audio.play();
+    //Attach an event listener to each song
+    Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
+        e.addEventListener("click",element=>{
+            playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
 
-    audio.addEventListener("loadedmetadata",()=>{        //loadedmetadata does—it waits for the song’s info before doing anything else!
-        console.log(audio.duration,audio.currentSrc,audio.currentTime)
-    });
+        })
+    })
+
+    //Attach event listener to prev,play and next button
+    play.addEventListener("click",()=>{
+        if (curentSong.paused) {
+            curentSong.play()
+            play.src="pause.svg"
+        }
+        else{
+            curentSong.pause()
+            play.src="play.svg"
+        }
+    })
  }
  main()
