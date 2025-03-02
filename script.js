@@ -33,20 +33,22 @@
   }
   return songs
  }
- const playMusic=(track)=>{
+ const playMusic=(track,pause=false)=>{
     curentSong.src= "/songs/"+track;
-    curentSong.play()
-    play.src="pause.svg"
-    document.querySelector(".songinfo").innerHTML=track
+    if (!pause) {
+        curentSong.play()
+        play.src="pause.svg"
+    }
+    document.querySelector(".songinfo").innerHTML=decodeURI(track)
     document.querySelector(".songtime").innerHTML="00:00 / 00:00"
  }
  async function main(){
     let songs=await getSongs()      
     console.log(songs)
+    playMusic(songs[0],true)
 
     let songUL=document.querySelector(".songList").getElementsByTagName("ul")[0]
-    for (const song of songs) {
-        // songUL.innerHTML=songUL+song
+    for (const song of songs) {                //dispalying songs in library. 
         songUL.innerHTML=songUL.innerHTML+ `
         <li>
                             <img class="invert" src="music.svg" alt="">
@@ -82,9 +84,28 @@
         }
     })
 
-    //Listen for timeupdate event
+    //Listen for timeupdate event , timeupdate events works if time gets updated of a particular things , only works for audioo or video. 
     curentSong.addEventListener("timeupdate",()=>{
         document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(curentSong.currentTime)} / ${secondsToMinutesSeconds(curentSong.duration)}`
+        document.querySelector(".circle").style.left=(curentSong.currentTime/curentSong.duration)*100+"%";
+    })
+
+    //Event listener for seekbar
+    document.querySelector(".seekbar").addEventListener("click",e=>{
+        let percent= e.offsetX/e.target.getBoundingClientRect().width*100
+        document.querySelector(".circle").style.left=percent +"%";
+        curentSong.currentTime=((curentSong.duration)*percent)/100
+        })
+
+    //Event Listners for clicking Hamburger icon
+    document.querySelector(".hamburger").addEventListener("click",()=>{
+        document.querySelector(".left").style.left="0%";
+    })
+
+    //Event Listners for clicking Close icon
+    document.querySelector(".close").addEventListener("click",()=>{
+        document.querySelector(".left").style.left="-120%";
     })
  }
- main()
+
+ main() 
