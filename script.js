@@ -1,6 +1,21 @@
  console.log("Lets start with some JS")
  let curentSong= new Audio();
 
+ function secondsToMinutesSeconds(seconds) {
+    if (isNaN(seconds) || seconds < 0) {
+        return "00:00"; //jjwjw
+    }
+
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+    return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+
  async function getSongs() {         //getting songs from folder
   let a = await fetch("http://127.0.0.1:5501/songs/")  
   let response= await a.text();
@@ -65,6 +80,11 @@
             curentSong.pause()
             play.src="play.svg"
         }
+    })
+
+    //Listen for timeupdate event
+    curentSong.addEventListener("timeupdate",()=>{
+        document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(curentSong.currentTime)} / ${secondsToMinutesSeconds(curentSong.duration)}`
     })
  }
  main()

@@ -226,3 +226,10 @@
     left: 0%;
     transition: left 0.5s;
 }
+.abovebar{
+    display: flex;
+    justify-content: space-between;
+}
+.songinfo , .songtime{
+    color: black;
+}
