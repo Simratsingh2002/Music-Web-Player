@@ -1,5 +1,6 @@
  console.log("Lets start with some JS")
  let curentSong= new Audio();
+ let songs;
 
  function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
@@ -43,8 +44,11 @@
     document.querySelector(".songtime").innerHTML="00:00 / 00:00"
  }
  async function main(){
-    let songs=await getSongs()      
+    songs=await getSongs()      
     console.log(songs)
+    console.log(typeof length); // Should log "undefined" if not defined elsewhere
+    console.log(window.length); // If in a browser, check if it's picking up a global length
+
     playMusic(songs[0],true)
 
     let songUL=document.querySelector(".songList").getElementsByTagName("ul")[0]
@@ -106,6 +110,22 @@
     document.querySelector(".close").addEventListener("click",()=>{
         document.querySelector(".left").style.left="-120%";
     })
- }
+
+    //Event listener for previous and next buttons
+    previous.addEventListener("click",()=>{
+        let index=songs.indexOf(curentSong.src.split("/").slice(-1)[0])
+        if ((index-1)>=0) {
+            playMusic(songs[index-  1])
+        }}
+    )
+    next.addEventListener("click",()=>{
+        let index=songs.indexOf(curentSong.src.split("/").slice(-1)[0])
+        if ((index+1)<songs.length) {
+            playMusic(songs[index+1])
+        }
+    })
+
+    }
+ 
 
  main() 

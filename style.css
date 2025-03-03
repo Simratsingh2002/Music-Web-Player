@@ -90,8 +90,7 @@ body{
 }
 .cardContainer {
     margin: 30px;
-    display: flex;
-    justify-content: center;
+    display: flex; 
     gap: 10px;
     flex-wrap: wrap;
     overflow-y: auto;
@@ -212,6 +211,9 @@ body{
     font-size: 13px;
     width: 344px;
 } 
+.info div{
+    word-break: break-all;
+}
 .playnow{
     display: flex;
     justify-content: center;
@@ -248,9 +250,22 @@ body{
     margin: 20px 0;
     width: 100%;
 }
-.songinfo , .songtime{                       /*take a note of this*/
-    color: black;
+.timevol{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center ;
 }
+.songtime{
+    width: 125px ;
+    color: black;
+    padding: 0 12px;
+}
+.songinfo{                       /*take a note of this*/
+    color: black;
+    width: 250px;
+    padding: 0 12px;
+}
+
 
 @media (max-width: 1400px) {
     .left {
@@ -303,5 +318,9 @@ body{
     }
     .cardContainer{
         margin: 0;
+        justify-content: center;
+    }
+    .songinfo , .songtime{
+        width: auto;
     }
 } 
