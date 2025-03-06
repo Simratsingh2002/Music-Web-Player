@@ -57,6 +57,7 @@
 
         })
     })
+    return songs;
  }
  const playMusic=(track,pause=false)=>{
     curentSong.src= `/${currFolder}/`+track;
@@ -105,6 +106,7 @@
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click",async item=>{
             songs=await getSongs(`songs/${item.currentTarget.dataset.folder}`)     //currentTarget is the element that the event listener is attached to,if selected target is what part of card we clicked on
+            playMusic(songs[0])
         })
     });
  }
@@ -169,6 +171,21 @@
     //Event listner to volume button
     document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change",(e)=>{
         curentSong.volume=parseInt(e.target.value)/100
+    })
+
+    // Add event listener to mute the track
+    document.querySelector(".volume>img").addEventListener("click", e=>{ 
+        if(e.target.src.includes("volume.svg")){
+            e.target.src = e.target.src.replace("volume.svg", "mute.svg")
+            curentSong.volume = 0;
+            document.querySelector(".range").getElementsByTagName("input")[0].value = 0;
+        }
+        else{
+            e.target.src = e.target.src.replace("mute.svg", "volume.svg")
+            curentSong.volume = .10;
+            document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
+        }
+
     })
 
     
