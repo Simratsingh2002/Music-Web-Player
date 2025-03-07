@@ -115,7 +115,7 @@
     await getSongs("songs/ncs")         
     playMusic(songs[0],true)
     //Display all albums in page
-     displayAlbums()
+     await displayAlbums()
 
     
 
