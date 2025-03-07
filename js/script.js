@@ -105,14 +105,14 @@ async function displayAlbums() {
     //Event listener for loading playlist whenever card is clicked
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", async item => {
-            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);     //currentTarget is the element that the event listener is attached to,if selected target is what part of card we clicked on
+            songs = await getSongs(`public/songs/${item.currentTarget.dataset.folder}`);     //currentTarget is the element that the event listener is attached to,if selected target is what part of card we clicked on
             playMusic(songs[0]);
         });
     });
 }
 
 async function main() {
-    await getSongs("songs/ncs");
+    await getSongs("public/songs/ncs");
     playMusic(songs[0], true);
     //Display all albums in page
     await displayAlbums();
