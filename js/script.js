@@ -66,10 +66,10 @@ const playMusic = (track, pause = false) => {
 }
 
 async function displayAlbums() {
-    console.log(`Fetching albums from /public/songs/`);
-    let a = await fetch(`/public/songs/`);
+    console.log(`Fetching albums from /songs/`);
+    let a = await fetch(`/songs/`);
     let response = await a.text();
-    console.log(`Response from /public/songs/:`, response);
+    console.log(`Response from /songs/:`, response);
     let div = document.createElement("div");
     div.innerHTML = response;
     let anchors = div.getElementsByTagName("a");
@@ -77,16 +77,16 @@ async function displayAlbums() {
     let array = Array.from(anchors);
     for (let index = 0; index < array.length; index++) {
         const e = array[index]; 
-        if (e.href.includes("/public/songs")) {
+        if (e.href.includes("/songs")) {
             let folder = e.href.split("/").slice(-2)[1];      //different hee tpp
             if (folder == "songs") {        //Different codee, harry not having songs here 
                 continue;
             }
             //Get the meta deta of folder
-            console.log(`Fetching metadata from /public/songs/${folder}/info.json`);
-            let a = await fetch(`/public/songs/${folder}/info.json`);
+            console.log(`Fetching metadata from /songs/${folder}/info.json`);
+            let a = await fetch(`/songs/${folder}/info.json`);
             let response = await a.json();
-            console.log(`Response from /public/songs/${folder}/info.json:`, response);
+            console.log(`Response from /songs/${folder}/info.json:`, response);
             cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
             <div class="play">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -95,7 +95,7 @@ async function displayAlbums() {
                         stroke-linejoin="round" />
                 </svg>
             </div>
-            <img src="/public/songs/${folder}/cover.jpg" alt="">
+            <img src="/songs/${folder}/cover.jpg" alt="">
             <h2>${response.title}</h2>
             <p>${response.description}</p>
         </div>`;
@@ -105,14 +105,14 @@ async function displayAlbums() {
     //Event listener for loading playlist whenever card is clicked
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", async item => {
-            songs = await getSongs(`public/songs/${item.currentTarget.dataset.folder}`);     //currentTarget is the element that the event listener is attached to,if selected target is what part of card we clicked on
+            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`);     //currentTarget is the element that the event listener is attached to,if selected target is what part of card we clicked on
             playMusic(songs[0]);
         });
     });
 }
 
 async function main() {
-    await getSongs("public/songs/ncs");
+    await getSongs("songs/ncs");
     playMusic(songs[0], true);
     //Display all albums in page
     await displayAlbums();
