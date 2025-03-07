@@ -329,11 +329,12 @@ body{
         right: 25px;
     }
     .card{
-        width: 44vw;
+        width: 55vw;
     }
     .cardContainer{
         margin: 0;
         justify-content: center;
+        max-height: 50vh;
     }
     .songinfo , .songtime{
         width: auto;
@@ -348,7 +349,7 @@ body{
 }
 @media (max-width: 400px) {
     .card{
-        width: 84vw;
+        width: auto;
     }
     
 } 

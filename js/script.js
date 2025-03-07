@@ -37,14 +37,14 @@
     for (const song of songs) {                //dispalying songs in library. 
         songUL.innerHTML=songUL.innerHTML+ `
         <li>
-                            <img class="invert" src="music.svg" alt="">
+                            <img class="invert" src="img/music.svg" alt="">
                             <div class="info">
                                 <div>${song.replaceAll("%20"," ")}</div>
                                 <div>Song Artist</div>
                             </div>
                             <div class="playnow">
                                 <span>Play now</span>
-                                <img class="invert" src="play.svg" alt="">
+                                <img class="invert" src="img/play.svg" alt="">
                             </div>
                         </li>
         
@@ -63,7 +63,7 @@
     curentSong.src= `/${currFolder}/`+track;
     if (!pause) {
         curentSong.play()
-        play.src="pause.svg"
+        play.src="img/pause.svg"
     }
     document.querySelector(".songinfo").innerHTML=decodeURI(track)
     document.querySelector(".songtime").innerHTML="00:00 / 00:00"
@@ -123,11 +123,11 @@
     play.addEventListener("click",()=>{
         if (curentSong.paused) {
             curentSong.play()
-            play.src="pause.svg"
+            play.src="img/pause.svg"
         }
         else{
             curentSong.pause()
-            play.src="play.svg"
+            play.src="img/play.svg"
         }
     })
 
@@ -182,8 +182,8 @@
         }
         else{
             e.target.src = e.target.src.replace("mute.svg", "volume.svg")
-            curentSong.volume = .10;
-            document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
+            curentSong.volume = .50;
+            document.querySelector(".range").getElementsByTagName("input")[0].value = 50;
         }
 
     })
