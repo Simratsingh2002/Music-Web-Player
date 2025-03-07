@@ -18,7 +18,7 @@
 
  async function getSongs(folder) {         //getting songs from folder
   currFolder=folder;
-  let a = await fetch(`${folder}/`)  
+  let a = await fetch(`/${folder}/`)  
   let response= await a.text();
   let div=document.createElement("div")
   div.innerHTML=response;
@@ -71,7 +71,7 @@
 
 
  async function displayAlbums() {
-    let a = await fetch(`/songs`)
+    let a = await fetch(`/songs/`)
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
