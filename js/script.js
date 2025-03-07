@@ -18,7 +18,7 @@
 
  async function getSongs(folder) {         //getting songs from folder
   currFolder=folder;
-  let a = await fetch(`http://127.0.0.1:5501/${folder}/`)  
+  let a = await fetch(`${folder}/`)  
   let response= await a.text();
   let div=document.createElement("div")
   div.innerHTML=response;
@@ -71,7 +71,7 @@
 
 
  async function displayAlbums() {
-    let a = await fetch(`http://127.0.0.1:5501/songs/`)
+    let a = await fetch(`/songs/`)
     let response = await a.text();
     let div = document.createElement("div")
     div.innerHTML = response;
@@ -85,7 +85,7 @@
             if (folder=="songs") {        //Different codee, harry not having songs here 
                 continue;}
             //Get the meta deta of folder
-            let a = await fetch(`http://127.0.0.1:5501/songs/${folder}/info.json`)
+            let a = await fetch(`/songs/${folder}/info.json`)
             let response = await a.json();
             cardContainer.innerHTML = cardContainer.innerHTML +`<div data-folder="${folder}" class="card">
             <div class="play">
