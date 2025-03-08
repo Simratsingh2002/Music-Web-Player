@@ -2,7 +2,6 @@ console.log("Lets start with some JS")
 let curentSong = new Audio();
 let songs;
 let currFolder;
-bvjbibjb
 
 function secondsToMinutesSeconds(seconds) {
     if (isNaN(seconds) || seconds < 0) {
