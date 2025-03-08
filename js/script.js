@@ -67,7 +67,7 @@ const playMusic = (track, pause = false) => {
 
 async function displayAlbums() {
     console.log(`Fetching albums from /songs/`);
-    let a = await fetch(`/songs/`);
+    let a = await fetch(`./songs/`);
     let response = await a.text();
     console.log(`Response from /songs/:`, response);
     let div = document.createElement("div");
